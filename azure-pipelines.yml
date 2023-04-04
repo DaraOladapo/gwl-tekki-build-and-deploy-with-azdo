@@ -6,20 +6,42 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
-
 variables:
   buildConfiguration: 'Release'
+  buildAgent: 'ubuntu-latest'
 
-steps:
-- script: dotnet build --configuration $(buildConfiguration) TekkiGurus.WebAppDemo
-  displayName: 'dotnet build $(buildConfiguration)'
-- script: dotnet publish --no-build  --configuration $(buildConfiguration) --output $(build.artifactstagingdirectory) TekkiGurus.WebAppDemo
-  displayName: 'dotnet publish $(buildConfiguration)'
+stages:
+  - stage: build
+    displayName: 'Build on code push'
+    jobs:
+      - job: build
+        pool: $(buildAgent)
+        steps:
+          - script: dotnet build --configuration $(buildConfiguration) TekkiGurus.WebAppDemo
+            displayName: 'dotnet build $(buildConfiguration)'
+          - script: dotnet publish --no-build  --configuration $(buildConfiguration) --output $(build.artifactstagingdirectory) TekkiGurus.WebAppDemo
+            displayName: 'dotnet publish $(buildConfiguration)'   
+ 
+  - stage: deploy
+    displayName: 'Deploy to Azure'
+    jobs:
+      - job: deploy
+        pool: $(buildAgent)
+        steps:
+          - script: echo 'Hello World'
+  
+# pool:
+#   vmImage: ubuntu-latest
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+
+# steps:
+# - script: dotnet build --configuration $(buildConfiguration) TekkiGurus.WebAppDemo
+#   displayName: 'dotnet build $(buildConfiguration)'
+# - script: dotnet publish --no-build  --configuration $(buildConfiguration) --output $(build.artifactstagingdirectory) TekkiGurus.WebAppDemo
+#   displayName: 'dotnet publish $(buildConfiguration)'
+
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#     ArtifactName: 'drop'
+#     publishLocation: 'Container'
