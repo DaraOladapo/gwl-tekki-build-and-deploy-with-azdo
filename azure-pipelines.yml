@@ -15,7 +15,8 @@ stages:
     displayName: 'Build on code push'
     jobs:
       - job: build
-        pool: $(buildAgent)
+        pool: 
+         vmImage: $(buildAgent)
         steps:
           - script: dotnet build --configuration $(buildConfiguration) TekkiGurus.WebAppDemo
             displayName: 'dotnet build $(buildConfiguration)'
@@ -26,7 +27,8 @@ stages:
     displayName: 'Deploy to Azure'
     jobs:
       - job: deploy
-        pool: $(buildAgent)
+        pool: 
+         vmImage: $(buildAgent)
         steps:
           - script: echo 'Hello World'
   
