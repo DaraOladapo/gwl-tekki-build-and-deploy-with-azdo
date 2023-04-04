@@ -15,6 +15,7 @@ stages:
     displayName: 'Build on code push'
     jobs:
       - job:
+        displayName: 'Build code and publish artifacts'
         pool: 
          vmImage: $(buildAgent)
         steps:
@@ -27,6 +28,7 @@ stages:
     displayName: 'Deploy to Azure'
     jobs:
       - job:
+        displayName: 'Deploy artifacts from build stage to Azure'
         pool: 
          vmImage: $(buildAgent)
         steps:
