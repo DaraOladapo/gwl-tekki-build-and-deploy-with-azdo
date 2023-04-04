@@ -13,9 +13,5 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: |
-    cd TekkiGurus.WebAppDemo
-    pwd
-    ls
-    dotnet build --configuration $(buildConfiguration)
+- script: dotnet build --configuration $(buildConfiguration) TekkiGurus.WebAppDemo
   displayName: 'dotnet build $(buildConfiguration)'
