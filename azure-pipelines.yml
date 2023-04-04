@@ -11,10 +11,10 @@ variables:
   buildAgent: 'ubuntu-latest'
 
 stages:
-  - stage: build
+  - stage:
     displayName: 'Build on code push'
     jobs:
-      - job: build
+      - job:
         pool: 
          vmImage: $(buildAgent)
         steps:
@@ -23,10 +23,10 @@ stages:
           - script: dotnet publish --no-build  --configuration $(buildConfiguration) --output $(build.artifactstagingdirectory) TekkiGurus.WebAppDemo
             displayName: 'dotnet publish $(buildConfiguration)'   
  
-  - stage: deploy
+  - stage:
     displayName: 'Deploy to Azure'
     jobs:
-      - job: deploy
+      - job:
         pool: 
          vmImage: $(buildAgent)
         steps:
