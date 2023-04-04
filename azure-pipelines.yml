@@ -15,3 +15,5 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration) TekkiGurus.WebAppDemo
   displayName: 'dotnet build $(buildConfiguration)'
+- script: dotnet publish --no-build  --configuration $(buildConfiguration) --output $(build.artifactstagingdirectory) TekkiGurus.WebAppDemo
+  displayName: 'dotnet publish $(buildConfiguration)'
