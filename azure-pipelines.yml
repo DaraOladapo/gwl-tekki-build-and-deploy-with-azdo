@@ -38,4 +38,4 @@ stages:
         pool: 
          vmImage: $(buildAgent)
         steps:
-          - script: 'Hello World'
+          - script: echo 'Hello World'
