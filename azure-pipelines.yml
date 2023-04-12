@@ -25,7 +25,7 @@ stages:
             displayName: 'dotnet publish $(buildConfiguration)'
           - task: ArchiveFiles@2
             inputs:
-              rootFolderOrFile: '$((build.artifactstagingdirectory)'
+              rootFolderOrFile: '$(build.artifactstagingdirectory)'
               includeRootFolder: false
               archiveType: 'zip'
               archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
