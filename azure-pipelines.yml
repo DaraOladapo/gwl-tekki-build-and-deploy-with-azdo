@@ -23,6 +23,13 @@ stages:
             displayName: 'dotnet build $(buildConfiguration)'
           - script: dotnet publish --no-build  --configuration $(buildConfiguration) --output $(build.artifactstagingdirectory) TekkiGurus.WebAppDemo
             displayName: 'dotnet publish $(buildConfiguration)'
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: '$(Build.BinariesDirectory)'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+              replaceExistingArchive: true
           - task: PublishBuildArtifacts@1
             displayName: 'Publish build to artifacts directory'
             inputs:
