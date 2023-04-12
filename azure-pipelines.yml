@@ -22,7 +22,13 @@ stages:
           - script: dotnet build --configuration $(buildConfiguration) TekkiGurus.WebAppDemo
             displayName: 'dotnet build $(buildConfiguration)'
           - script: dotnet publish --no-build  --configuration $(buildConfiguration) --output $(build.artifactstagingdirectory) TekkiGurus.WebAppDemo
-            displayName: 'dotnet publish $(buildConfiguration)'   
+            displayName: 'dotnet publish $(buildConfiguration)'
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish build to artifacts directory'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
  
   - stage:
     displayName: 'Deploy to Azure'
@@ -32,4 +38,4 @@ stages:
         pool: 
          vmImage: $(buildAgent)
         steps:
-          - script: echo 'Hello World'
+          - script: 'Hello World'
