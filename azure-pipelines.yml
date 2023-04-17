@@ -51,4 +51,3 @@ stages:
             downloadType: 'specific'
             itemPattern: '**/*.zip'
             downloadPath: '$(System.ArtifactsDirectory)'
-            cleanDestinationFolder: true
