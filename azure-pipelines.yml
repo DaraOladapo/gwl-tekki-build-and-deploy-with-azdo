@@ -46,8 +46,16 @@ stages:
          vmImage: $(buildAgent)
         steps:
         - task: DownloadBuildArtifacts@1
+          displayName: 'Download build artifacts'
           inputs:
             buildType: 'current'
             downloadType: 'specific'
             itemPattern: '**/*.zip'
             downloadPath: '$(System.ArtifactsDirectory)'
+        - task: AzureWebApp@1
+          inputs:
+            azureSubscription: 'MVP Subscription(6e16946d-c30b-48c0-a0de-26f1159aa94f)'
+            appType: 'webAppLinux'
+            appName: 'gwltekki-webapp'
+            package: '$(System.ArtifactsDirectory)/**/*.zip'
+            runtimeStack: 'DOTNETCORE|7.0'
