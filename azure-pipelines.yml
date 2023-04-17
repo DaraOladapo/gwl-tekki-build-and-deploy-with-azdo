@@ -45,4 +45,10 @@ stages:
         pool: 
          vmImage: $(buildAgent)
         steps:
-          - script: echo 'Hello World'
+        - task: DownloadBuildArtifacts@1
+          inputs:
+            buildType: 'current'
+            downloadType: 'specific'
+            itemPattern: '**/*.zip'
+            downloadPath: '$(System.ArtifactsDirectory)'
+            cleanDestinationFolder: true
