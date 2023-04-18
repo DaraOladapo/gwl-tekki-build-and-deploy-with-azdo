@@ -54,7 +54,7 @@ stages:
             downloadPath: '$(System.ArtifactsDirectory)'
         - task: AzureWebApp@1
           inputs:
-            azureSubscription: 'MVP Subscription(6e16946d-c30b-48c0-a0de-26f1159aa94f)'
+            azureSubscription: '<azureConnection goes here>'
             appType: 'webAppLinux'
             appName: 'gwltekki-webapp'
             package: '$(System.ArtifactsDirectory)/**/*.zip'
